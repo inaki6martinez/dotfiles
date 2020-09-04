@@ -81,7 +81,7 @@ set showcmd " Show (partial) command in status line.
 
 " Timeout 
 set timeout
-set timeoutlen=500
+set timeoutlen=1000
 "
 " =============================================================================
 " # Navigation
