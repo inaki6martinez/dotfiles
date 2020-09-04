@@ -1,0 +1,14 @@
+partial default xkb_types "mytype" {
+    type "THREE_LEVEL_ALPHABETIC_CUS" {
+        modifiers= Shift+Lock+LevelThree;
+        map[Shift]= Level2;
+        map[Lock]= Level2;
+        map[LevelThree]= Level3;
+        map[Shift+LevelThree]= Level3;
+        map[Lock+LevelThree]= Level3;
+        map[Shift+Lock+LevelThree]= Level3;
+        level_name[Level1]= "Base";
+        level_name[Level2]= "Shift";
+        level_name[Level3]= "Alt Base";
+    };
+};
