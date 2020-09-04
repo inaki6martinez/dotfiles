@@ -49,7 +49,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -75,7 +75,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git
+         zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,5 +106,24 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Load mtime at bash start-up
+#echo "bashrc mtime: $(stat -f "%m" ~/.bashrc)" >&2
+export ZSHRC_MTIME=$(date -r ~/.zshrc +%s)
+
+#reload the bashrc if it has been changed
+#PROMPT_COMMAND="check_and_reload_zshrc"
+check_and_reload_zshrc () {
+	if [ "$(date -r ~/.zshrc +%s)" != $ZSHRC_MTIME ]; then
+		export ZSHRC_MTIME="$(date -r ~/.bashrc +%s)"
+		echo "zshrc changed. re-sourcing..." >&2
+		source ~/.zshrc
+	fi
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd check_and_reload_zshrc
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

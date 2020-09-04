@@ -59,9 +59,10 @@ end
 " Colors
 colorscheme monokai
 " TAB Hightlight "
-highlight ExtraWhitespace ctermfg=7 ctermbg=8 cterm=none guifg=#c0c0c0 guibg=#808080 gui=none
+"highlight ExtraWhitespace ctermfg=7 ctermbg=8 cterm=none guifg=#c0c0c0 guibg=#808080 gui=none
+"":au BufEnter * match ExtraWhitespace /\t/
 " Show trailing whitespace:
-:au BufEnter * match ExtraWhitespace /\t/
+:au BufEnter * match ColorColumn /\t/
 " END of Highlight"
 :au BufEnter * set colorcolumn=80
 
@@ -77,6 +78,10 @@ endfunc
 nnoremap <silent> <leader>n :call NumberToggle()<CR>
 set mouse=a " Enable mouse usage (all modes) in terminals
 set showcmd " Show (partial) command in status line.
+
+" Timeout 
+set timeout
+set timeoutlen=500
 "
 " =============================================================================
 " # Navigation
@@ -217,7 +222,7 @@ map <silent> <leader>h :call Mosh_Flip_Ext()<CR>
 
 " Decent wildmenu
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest:full
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 

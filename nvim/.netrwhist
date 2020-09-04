@@ -1,5 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/inaki/dev/zivos/ibd_trunk/source/snmpd'
+let g:netrw_dirhist_8='/home/inaki/.config/nvim'
+let g:netrw_dirhist_7='/home/inaki/.oh-my-zsh/custom'
+let g:netrw_dirhist_6='/home/inaki/dev/zivos_ibd_trunk/package/ecct'
+let g:netrw_dirhist_5='/home/inaki/.oh-my-zsh'
 let g:netrw_dirhist_4='/home/inaki/.tmux/plugins/tpm'
 let g:netrw_dirhist_3='/home/inaki/dev/esmr5/work/meter_esmr5/source'
 let g:netrw_dirhist_2='/home/inaki'
