@@ -58,6 +58,8 @@ end
 " =============================================================================
 " Colors
 colorscheme monokai
+" Italic commnets https://rsapkf.xyz/blog/enabling-italics-vim-tmux
+highlight Comment cterm=italic
 " TAB Hightlight "
 "highlight ExtraWhitespace ctermfg=7 ctermbg=8 cterm=none guifg=#c0c0c0 guibg=#808080 gui=none
 "":au BufEnter * match ExtraWhitespace /\t/
@@ -65,6 +67,10 @@ colorscheme monokai
 :au BufEnter * match ColorColumn /\t/
 " END of Highlight"
 :au BufEnter * set colorcolumn=80
+
+:au BufEnter * set cursorline
+:au WinEnter * set cursorline
+:au WinLeave * set nocursorline
 
 set number
 set relativenumber
@@ -111,8 +117,17 @@ vmap <Leader>P "+P
 " =============================================================================
 " # Mappings
 " =============================================================================
+function! TurnOffCapsLock()
+	let cmd = "turn_off_capslock"
+	let result = system(cmd)
+endfun
+
+inoremap <esc> <esc>:call TurnOffCapsLock()<cr>
 inoremap <silent><esc> <esc>:call TurnOffCapsLock()<cr>
 nnoremap ; :
+nnoremap ff :w<CR>
+inoremap jj <ESC>
+inoremap <silent>JJ <ESC>:call TurnOffCapsLock()<CR>
 inoremap kk ->
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -130,11 +145,6 @@ nmap <leader>qw :wq<CR>
 " CScope
 nmap <F12> <Plug>CscopeDBInit
 
-function! TurnOffCapsLock()
-	let cmd = "turn_off_capslock"
-	let result = system(cmd)
-endfun
-inoremap <esc> <esc>:call TurnOffCapsLock()<cr>
 " =============================================================================
 
 nnoremap <silent> <leader>o :FZF<CR>
@@ -308,12 +318,12 @@ vmap <leader>m get_visual_selection()
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use uppercase target labels and type as a lower case
-""let g:EasyMotion_use_upper = 1
-""let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-""" Turn on case-insensitive feature
-""let g:EasyMotion_smartcase = 1
-""map <Leader> <Plug>(easymotion-prefix)
-""
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+map <Leader> <Plug>(easymotion-prefix)
+
 """ incsearch
 ""map / <Plug>(incsearch-forward)
 ""map ? <Plug>(incsearch-backward)
