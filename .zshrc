@@ -126,7 +126,20 @@ add-zsh-hook precmd check_and_reload_zshrc
 # export
 export XDG_CONFIG_HOME=$HOME/.config
 
+# Set line editing to vim style
+bindkey -v
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--extended"
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fdfind --type file --ignore-file /home/inaki/.fdignore'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
+
+export TERM=xterm-256color-italic
+
+source $HOME/.aliases

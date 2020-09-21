@@ -1,0 +1,29 @@
+export CSCOPE_EDITOR=/usr/bin/nvim
+export SVN_EDITOR=/usr/bin/nvim
+alias br=broot
+alias v=nvim
+alias vim=nvim
+#alias pdf=zathura
+alias fd=fdfind
+#alias rg='rg --ignore-file=/home/inaki/.fdignore'
+
+# Opens the files specified with vim
+alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
+alias -s {pdf}=zathura
+alias -s {xls,xlsx,csv}="libreoffice6.4 --calc"
+
+# avoid entering "| grep" 
+alias -g G='| grep -i'
+
+# Chage to the most common directories
+d='dirs -v | head -10'
+0='cd ~0'
+1='cd ~1'
+2='cd ~2'
+3='cd ~3'
+4='cd ~4'
+5='cd ~5'
+6='cd ~6'
+7='cd ~7'
+8='cd ~8'
+9='cd ~9'
