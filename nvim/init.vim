@@ -324,7 +324,7 @@ let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
-map <Leader> <Plug>(easymotion-prefix)
+"map <Leader> <Plug>(easymotion-prefix)
 
 """ incsearch
 ""map / <Plug>(incsearch-forward)
