@@ -148,13 +148,7 @@ nmap <F12> <Plug>CscopeDBInit
 " =============================================================================
 
 nnoremap <silent> <leader>o :FZF<CR>
-" Open from buffer
-nnoremap <silent> <leader>O :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2
-\ })<CR>
+nnoremap <silent> <leader>O :Buffers<CR>
 
 
 " <leader>s for Rg search
