@@ -6,6 +6,7 @@ alias vim=nvim
 #alias pdf=zathura
 alias fd=fdfind
 #alias rg='rg --ignore-file=/home/inaki/.fdignore'
+alias gi=git
 
 # Opens the files specified with vim
 alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
