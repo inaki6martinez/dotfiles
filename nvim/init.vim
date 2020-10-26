@@ -44,6 +44,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 ""Plug 'vim-scripts/vim-svngutter'
 
+" Split resize plugin
+Plug 'talek/obvious-resize'
 
 call plug#end()
 
@@ -89,6 +91,11 @@ set showcmd " Show (partial) command in status line.
 set timeout
 set timeoutlen=1000
 "
+" Split resize
+nnoremap <silent> <C-right> :<C-U>ObviousResizeRight<CR>
+nnoremap <silent> <C-left> :<C-U>ObviousResizeLeft<CR>
+nnoremap <silent> <C-up> :<C-U>ObviousResizeUp<CR>
+nnoremap <silent> <C-down> :<C-U>ObviousResizeDown<CR>
 " =============================================================================
 " # Navigation
 " =============================================================================
@@ -120,9 +127,14 @@ vmap <Leader>P "+P
 function! TurnOffCapsLock()
 	let cmd = "turn_off_capslock"
 	let result = system(cmd)
+"endfun
+"function! KillRg()
+  "Kill the processes that :Rg leves opened"
+	let cmd = "kill_rg"
+	let reuslt = system(cmd)
 endfun
 
-inoremap <esc> <esc>:call TurnOffCapsLock()<cr>
+nnoremap <silent><esc> <esc>:call TurnOffCapsLock()<cr>
 inoremap <silent><esc> <esc>:call TurnOffCapsLock()<cr>
 nnoremap ; :
 nnoremap ff :w<CR>

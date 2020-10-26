@@ -3,15 +3,15 @@ export SVN_EDITOR=/usr/bin/nvim
 alias br=broot
 alias v=nvim
 alias vim=nvim
-#alias pdf=zathura
 alias fd=fdfind
 #alias rg='rg --ignore-file=/home/inaki/.fdignore'
 alias gi=git
 
 # Opens the files specified with vim
 alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
-alias -s {pdf}=zathura
 alias -s {xls,xlsx,csv}="libreoffice6.4 --calc"
+alias -s {ppt,pptx}="libreoffice6.4 --impress"
+alias -s {doc,docx}="libreoffice6.4 --writer"
 
 # avoid entering "| grep" 
 alias -g G='| grep -i'
@@ -32,3 +32,6 @@ d='dirs -v | head -10'
 # Safe rm
 alias del=saferm.sh
 alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
+
+# Safe mv
+alias mv="mv -i"
