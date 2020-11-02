@@ -13,6 +13,8 @@ filetype off
 " =============================================================================
 call plug#begin()
 
+Plug 'file:///home/inaki/dev/myvimplugin'
+
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
 Plug 'andymass/vim-matchup'
