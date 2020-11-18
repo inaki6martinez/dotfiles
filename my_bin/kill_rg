@@ -1,0 +1,1 @@
+ps -ef | grep "rg --column --line-number --no-heading" | grep -v grep | awk '{print $2}' | xargs -r kill

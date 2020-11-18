@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cat package/libmcoms/libmcoms.in | grep _REV | head -1;
+cat package/libmutils/libmutils.in | grep _REV | head -1;
+cat package/libmtr/libmtr.in | grep _REV | head -1;
+cat package/meter_esmr5/meter_esmr5.in | grep _REV | head -1;
+cat package/libcgsec/libcgsec.in | grep _REV | head -1;
+cat package/libcsp/libcsp.in | grep _REV | head -1;
+cat package/libcutils/libcutils.in | grep _REV | head -1;
+cat package/zinetis/zinetis.in | grep _REV | head -1;
+cat package/wmbus/wmbus.in | grep _REV | head -1;
+cat package/lte/lte.in | grep _REV | head -1;

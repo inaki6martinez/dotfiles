@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openfortivpn 89.6.239.150:10443 -u inaki.martinez --trusted-cert 6269f6d1ac5f440c1bc1e6eb2daabe35c1ab6fddb3184c4f14cd4b3f2c04c4fd

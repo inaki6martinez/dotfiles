@@ -1,0 +1,12 @@
+#!/bin/bash
+
+active_locks=$(xset q | awk '/LED/{ print $10 }' | grep -o '.$')
+
+caps_lock=$(($active_locks & 1))
+
+if [ $caps_lock -gt 0 ]
+then
+	xdotool key "Shift_L+Shift_R"	
+fi
+
+

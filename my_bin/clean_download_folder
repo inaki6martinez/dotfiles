@@ -1,0 +1,5 @@
+#!/bin/bash
+
+find /home/inaki/Downloads/ -mtime +14 -exec rm -fr {} \;
+
+

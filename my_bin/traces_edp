@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -n "$2" ]
+then
+	picocom -b 115200  $1 | ts [%m/%d-%H:%M:%S] | tee -a $2
+else
+	picocom -b 115200  $1 | ts [%m/%d-%H:%M:%S] 
+fi

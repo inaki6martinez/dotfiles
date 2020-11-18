@@ -1,0 +1,3 @@
+#!/bin/bash
+
+smbpasswd -r ESZMD200.cgglobal.com -U inaki.martinez

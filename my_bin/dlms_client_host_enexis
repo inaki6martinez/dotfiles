@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -n "$2" ]
+then
+	/home/inaki/dev/libmcoms_git/tools/mcoms_tools_hdlc_dlms_client -p 0x11 -d /tmp/hdlc_socket -c 1 < $1 2>&1 | ts [%m/%d-%H:%M:%.S] | tee -a $2
+else
+	/home/inaki/dev/libmcoms_git/tools/mcoms_tools_hdlc_dlms_client -p 0x11 -d /tmp/hdlc_socket -c 1 < $1 2>&1 | ts [%m/%d-%H:%M:%.S]
+fi

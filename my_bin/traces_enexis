@@ -1,0 +1,21 @@
+#!/bin/bash
+
+logdir=/home/inaki/Documents/meter_logs/
+
+find "$logdir" -type f -mtime +30 -name '*.txt' -execdir rm -- '{}' \;
+
+if [ ! -z $1 ]
+then
+	fname=$(ls -tr $logdir | tail -1)
+	vim "$logdir$fname"
+	#vim "$fname"
+else
+	now=$(date '+%Y%m%d_%H%M%S')
+	fname="$logdir$now.txt"
+	echo $fname
+	picocom -b 921600 /dev/serial/by-id/usb-FTDI_TTL232R-3V3_FT59OJ7O-if00-port0 | ts [%m/%d-%H:%M:%.S] | tee "$fname"
+fi
+
+# to filter the file
+#tail -f ~/Documents/meter_logs/20200910_102743.txt | grep -a --line-buffered "profile" 
+

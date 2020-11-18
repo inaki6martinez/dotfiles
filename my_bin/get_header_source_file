@@ -1,0 +1,9 @@
+#!/bin/bash
+#var=$(timeout 1 find "$(dirname "$1")" -name $2'*')
+curdir=$PWD
+cd $(dirname "$1")
+rel_path_len=$((${#PWD} - ${#curdir}))
+rel_path=${PWD:$((${#curdir}+1)):$rel_path_len}
+filename=$(echo $2 | sed 's/\./\\./')
+var=$(timeout 1 fdfind "^("$filename")[a-z]*")
+echo $rel_path/$var

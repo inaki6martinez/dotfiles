@@ -1,0 +1,17 @@
+#!/bin/bash
+
+logdir=/home/inaki/Documents/zivos_logs/
+
+find "$logdir" -type f -mtime +30 -name '*.txt' -execdir rm -- '{}' \;
+
+if [ ! -z $1 ]
+then
+	fname=$(ls -tr $logdir | tail -1)
+	vim "$logdir$fname"
+else
+	now=$(date '+%Y%m%d_%H%M%S')
+	fname="$logdir$now.txt"
+	echo $fname
+	make qemu 2>&1 | tee "$fname"
+
+fi

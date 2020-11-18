@@ -1,0 +1,3 @@
+#!/bin/bash
+
+libreoffice6.4 --calc /home/inaki/dev/esmr5/pp/work/meter_esmr5/esmr5_dlms_dm_b.xls &
