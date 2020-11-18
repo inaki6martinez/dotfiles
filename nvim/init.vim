@@ -190,11 +190,12 @@ set noshowmode
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'gitbranch' ,'modified' ] ],
       \   'right': [ ['lineinfo'], ['percent']]
       \ },
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
+      \   'gitbranch': 'FugitiveHead',
       \   'cocstatus': 'coc#status'
       \ },
       \ }
@@ -208,6 +209,13 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 "=============================================================================
 " Switch between header and source file
 "=============================================================================
+function! OpenFile(fname)
+    let pname = expand("%:p:h")
+    let cmd = "get_header_source_file " . pname . " " . a:fname
+	let file = system(cmd)
+    exe ":e" file
+endfun
+
 function! Mosh_Flip_Ext()
   " Switch editing between .c* and .h* files (and more).
   " Since .h file can be in a different dir, call find.
@@ -215,28 +223,30 @@ function! Mosh_Flip_Ext()
     let fname = substitute(expand("%:t"),'\.c\(.*\)','.h',"")
     let s:bufname = bufname(fname)	
 	if (strlen(s:bufname)) > 0
-		exe ":b" fname
+		try
+			exe ":b" fname
+		catch
+			call OpenFile(fname)
+		endtry
 	else
-        let pname = expand("%:p:h")
-        let cmd = "get_header_source_file " . pname . " " . fname
-	    let header = system(cmd)
-        exe ":e" header
+		call OpenFile(fname)
 	endif
   elseif match(expand("%"),"\\.h") > 0
     let fname = substitute(expand("%:t"),'\.h\(.*\)','.c',"")
     let s:bufname = bufname(fname)	
+	echom s:bufname
 	if (strlen(s:bufname)) > 0
-		exe ":b" fname
+		try
+			exe ":b" fname
+		catch
+			call OpenFile(fname)
+		endtry
 	else
-        let pname = expand("%:p:h")
-        let cmd = "get_header_source_file " . pname . " " . fname
-		echom cmd
-	    let source = system(cmd)
-        exe ":e" source
+		call OpenFile(fname)
 	endif
   endif
 endfun
-map <silent> <leader>h :call Mosh_Flip_Ext()<CR>
+map <silent><leader>h :call Mosh_Flip_Ext()<CR>
 
 " Decent wildmenu
 set wildmenu
