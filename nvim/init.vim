@@ -159,6 +159,14 @@ nmap <leader>qw :wq<CR>
 " CScope
 nmap <F12> <Plug>CscopeDBInit
 
+
+"GitGutter
+let g:gitgutter_map_keys = 0
+nmap <leader>gv <Plug>(GitGutterPreviewHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gp <Plug>(GitGutterPrevHunk)
+nmap <leader>gn <Plug>(GitGutterNextHunk)
+
 " =============================================================================
 
 nnoremap <silent> <leader>o :FZF<CR>
