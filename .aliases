@@ -35,3 +35,18 @@ alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
 
 # Safe mv
 alias mv="mv -i"
+
+reload_aliases () {
+    # do nothing if there is no $ALIAS_FILE
+    [[ -e ALIAS_FILE ]] || return 1
+    # check if $ALIAS_FILE has been modified since last reload
+    # the modifier `(:A)` resolves any symbolic links
+    if [[ $LAST_ALIAS_RELOAD < $(stat -c %Y ${ALIAS_FILE}(:A)) ]]; then
+        # remove all aliases; optional!
+        # only do this if all of your aliases are defined in $ALIAS_FILE
+        # also affects aliases defined on the command line
+        source $ALIAS_FILE
+        # update date of last reload
+        LAST_ALIAS_RELOAD=$(date +%s)
+    fi
+}
