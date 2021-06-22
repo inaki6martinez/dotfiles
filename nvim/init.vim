@@ -13,7 +13,7 @@ filetype off
 " =============================================================================
 call plug#begin()
 
-Plug 'file:///home/inaki/dev/myvimplugin'
+"Plug 'file:///home/inaki/dev/myvimplugin'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -48,6 +48,13 @@ Plug 'easymotion/vim-easymotion'
 
 " Split resize plugin
 Plug 'talek/obvious-resize'
+
+"Sudowrite
+"Plug 'tpope/vim-eunuch'
+Plug 'lambdalisue/suda.vim'
+
+"Comments in C/C++
+"Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
@@ -143,8 +150,7 @@ nnoremap ff :w<CR>
 inoremap jj <ESC>
 inoremap <silent>JJ <ESC>:call TurnOffCapsLock()<CR>
 inoremap kk ->
-inoremap " ""<left>
-inoremap ' ''<left>
+"inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
@@ -158,7 +164,6 @@ nmap <leader>qw :wq<CR>
 
 " CScope
 nmap <F12> <Plug>CscopeDBInit
-
 
 "GitGutter
 let g:gitgutter_map_keys = 0
