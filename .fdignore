@@ -1,0 +1,10 @@
+# /
+*.o
+cscope.files
+*.app.*
+/output/*/toolchain
+/output/zinetis*
+/output/host*
+
+
+
