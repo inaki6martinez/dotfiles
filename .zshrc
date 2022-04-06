@@ -135,7 +135,7 @@ bindkey -v
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--extended"
 # Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fdfind --type file --ignore-file /home/inaki/.fdignore'
+export FZF_DEFAULT_COMMAND='fdfind --type file -L --no-ignore-vcs --ignore-file /home/inaki/.fdignore'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
