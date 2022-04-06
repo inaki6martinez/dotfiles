@@ -1,11 +1,26 @@
 export CSCOPE_EDITOR=/usr/bin/nvim
 export SVN_EDITOR=/usr/bin/nvim
 alias br=broot
-alias v=nvim
-alias vim=nvim
 alias fd=fdfind
-#alias rg='rg --ignore-file=/home/inaki/.fdignore'
+#alias rg="rg --ignore-file=/home/inaki/.fdignore"
 alias gi=git
+
+#rg
+alias rgm="rg -t amake --type-add 'zmake:*.in' -tzmake -g "\!toolchain" -S"
+alias rgc="rg -tc- -g "\!toolchain" -S"
+
+#nvim
+alias v="nvim -O"
+alias vim="nvim -O"
+alias nvim="nvim -O"
+alias vd="nvim -d"
+
+#ls alias
+alias ll="ls -lah"
+
+#make
+alias ma="make application"
+alias maf="make application_factory"
 
 # Opens the files specified with vim
 alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
