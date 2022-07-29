@@ -24,9 +24,9 @@ alias maf="make application_factory"
 
 # Opens the files specified with vim
 alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
-alias -s {xls,xlsx,csv}="libreoffice6.4 --calc"
-alias -s {ppt,pptx}="libreoffice6.4 --impress"
-alias -s {doc,docx}="libreoffice6.4 --writer"
+alias -s {xls,xlsx,csv}="libreoffice7.2 --calc"
+alias -s {ppt,pptx}="libreoffice7.2 --impress"
+alias -s {doc,docx}="libreoffice7.2 --writer"
 
 # avoid entering "| grep" 
 alias -g G='| grep -i'
