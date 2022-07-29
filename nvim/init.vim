@@ -53,6 +53,10 @@ Plug 'talek/obvious-resize'
 "Plug 'tpope/vim-eunuch'
 Plug 'lambdalisue/suda.vim'
 
+" Diffview (both neccessary)
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
+
 "Comments in C/C++
 "Plug 'preservim/nerdcommenter'
 
@@ -171,6 +175,10 @@ nmap <leader>gv <Plug>(GitGutterPreviewHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
 nmap <leader>gp <Plug>(GitGutterPrevHunk)
 nmap <leader>gn <Plug>(GitGutterNextHunk)
+
+" VimDiff
+nmap <leader>r :diffg<CR>
+nmap <leader>w :diffpu<CR>
 
 " =============================================================================
 
@@ -355,14 +363,3 @@ let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
-"map <Leader> <Plug>(easymotion-prefix)
-
-""" incsearch
-""map / <Plug>(incsearch-forward)
-""map ? <Plug>(incsearch-backward)
-""map g/ <Plug>(incsearch-stay)
-""
-""" incsearch-easymotion
-""map z/ <Plug>(incsearch-easymotion-/)
-""map z? <Plug>(incsearch-easymotion-?)
-""map zg/ <Plug>(incsearch-easymotion-stay)
