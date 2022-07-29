@@ -1,0 +1,53 @@
+[user]
+	name = imartinez
+	email = inaki.martinez@zivautomation.com
+[core]
+	editor = nvim
+[alias]
+	# one-line log
+	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --abbrev-commit --graph 
+	llg = log --graph 
+	#log = log --abbrev-commit --pretty=oneline	
+	ci = commit -a 
+	st = status -s
+	co = checkout
+	difft = difftool
+	b = branch
+	cp = cherry-pick
+	# list branches sorted by last modified
+	bl = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	
+	# list aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+	chekcout = checkout
+	# show tool
+    showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
+# Use meld as diff tool
+[diff]
+	#tool = meld
+	tool = nvim
+[difftool]
+    prompt = false
+#[difftool "meld"]
+[difftool "nvim"]
+	#cmd = meld "$LOCAL" "$REMOTE"
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+
+# Meld as mergetool
+#[merge]
+#    tool = meld
+#[mergetool "meld"]
+#	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+
+[pull]
+	rebase = true
+
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging
+[merge]
+  tool = nvim
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
