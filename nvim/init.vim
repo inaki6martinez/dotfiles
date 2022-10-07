@@ -128,10 +128,13 @@ nmap <Leader>y "+y
 nmap <Leader>d "+d
 vmap <Leader>y "+y
 vmap <Leader>d "+d
-nmap <Leader>p "+p
+"nmap <Leader>p "+p
 nmap <Leader>P "+P
-vmap <Leader>p "+p
+"vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+"not substitute the register for the changed data
+xnoremap <Leader>p "_dP
 
 
 " =============================================================================
