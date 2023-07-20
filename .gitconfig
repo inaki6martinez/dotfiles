@@ -3,6 +3,7 @@
 	email = inaki.martinez@zivautomation.com
 [core]
 	editor = nvim
+	excludesfile = /home/inaki/.gitignore
 [alias]
 	# one-line log
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --abbrev-commit --graph 
@@ -25,22 +26,22 @@
 # Use meld as diff tool
 [diff]
 	#tool = meld
-	tool = nvim
+	tool = nvimdiff
 [difftool]
     prompt = false
+[difftool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 #[difftool "meld"]
-[difftool "nvim"]
-	#cmd = meld "$LOCAL" "$REMOTE"
-    cmd = nvim -d "$LOCAL" "$REMOTE"
+#	cmd = meld "$LOCAL" "$REMOTE"
 
-# Meld as mergetool
+## Meld as mergetool
 #[merge]
 #    tool = meld
 #[mergetool "meld"]
 #	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-
-[pull]
-	rebase = true
+#
+#[pull]
+#	rebase = true
 
 # define command which will be used when "nvim" is set as a merge tool
 [mergetool "nvim"]
@@ -51,3 +52,5 @@
 # automatically launch merge tool without displaying a prompt
 [mergetool]
   prompt = false
+[pull]
+	rebase = true

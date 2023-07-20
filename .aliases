@@ -2,12 +2,12 @@ export CSCOPE_EDITOR=/usr/bin/nvim
 export SVN_EDITOR=/usr/bin/nvim
 alias br=broot
 alias fd=fdfind
-#alias rg="rg --ignore-file=/home/inaki/.fdignore"
 alias gi=git
 
 #rg
 alias rgm="rg -t amake --type-add 'zmake:*.in' -tzmake -g "\!toolchain" -S"
 alias rgc="rg -tc- -g "\!toolchain" -S"
+alias rg="rg -S --ignore-file=/home/inaki/.fdignore"
 
 #nvim
 alias v="nvim -O"
@@ -16,14 +16,40 @@ alias nvim="nvim -O"
 alias vd="nvim -d"
 
 #ls alias
-alias ll="ls -lah"
+alias ll="exa -lah"
 
 #make
+alias make="colormake"
 alias ma="make application"
 alias maf="make application_factory"
+alias mre="make factory_esmr5.release"
+alias mc="make clean"
+
+alias z="zenter.sh"
+alias za="z make application"
+alias zaf="z make application_factory"
+alias zre="z make factory_esmr5.release"
+alias zc="z make clean"
+alias zemul="z make emul"
+
+#lazygit
+alias la="lazygit"
+alias lameter="lazygit -p work/meter_esmr5"
+alias lamcoms="lazygit -p work/libmcoms"
+alias lamutils="lazygit -p work/libmutils"
+alias lacutils="lazygit -p work/libcutils"
+alias lamtr="lazygit -p work/libmtr"
+alias lawmbus="lazygit -p work/wmbus"
+alias lalte="lazygit -p work/lte"
+alias latle="lazygit -p work/lte"
+
+
+#install
+alias install="sudo apt install"
+alias isntall="sudo apt install"
 
 # Opens the files specified with vim
-alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim}=nvim
+alias -s {c,h,cpp,txt,patch,log,in,mk,zsh,vim,lua}=nvim
 alias -s {xls,xlsx,csv}="libreoffice7.2 --calc"
 alias -s {ppt,pptx}="libreoffice7.2 --impress"
 alias -s {doc,docx}="libreoffice7.2 --writer"
@@ -44,12 +70,19 @@ d='dirs -v | head -10'
 8='cd ~8'
 9='cd ~9'
 
+alias esmr5='cd ~/dev/esmr5/pp'
+alias dtc='cd ~/dev/zivos/3.23.80-4WF01610016_RC1_bidelek'
+
 # Safe rm
 alias del=saferm.sh
 alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
 
 # Safe mv
 alias mv="mv -i"
+
+# Change cat for batcat
+alias c="batcat"
+alias cat="batcat"
 
 reload_aliases () {
     # do nothing if there is no $ALIAS_FILE

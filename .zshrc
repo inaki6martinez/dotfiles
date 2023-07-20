@@ -6,7 +6,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$PATH:/home/inaki/dotfiles/my_bin:/home/inaki/.local/bin"
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/inaki/.local/share/flatpak/exports/share"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/inaki/.oh-my-zsh"
@@ -78,6 +79,8 @@ ENABLE_CORRECTION="true"
 plugins=(git
          zsh-autosuggestions)
 
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -123,6 +126,12 @@ check_and_reload_zshrc () {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd check_and_reload_zshrc
 
+zstyle ':completion::complete:make:*:targets' call-command true
+
+autoload -Uz compinit
+compinit
+
+
 # export
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -140,6 +149,53 @@ export FZF_DEFAULT_COMMAND='fdfind --type file -L --no-ignore-vcs --ignore-file 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
 
+# Options to fzf command
+#export FZF_COMPLETION_OPTS='--border --info=inline'
+export FZF_COMPLETION_OPTS='--extended'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+
+#_fzf_compgen_path() {
+#  fd --hidden --follow --exclude ".git" --ignore-file ~/.fdignore . "$1"
+#}
+#
+## Use fd to generate the list for directory completion
+#_fzf_compgen_dir() {
+#  fd --type d --hidden --follow --exclude ".git" --ignore-file ~/.fdignore . "$1"
+#}
+#
+## Advanced customization of fzf options via _fzf_comprun function
+## - The first argument to the function is the name of the command.
+## - You should make sure to pass the rest of the arguments to fzf.
+#_fzf_comprun() {
+#  local command=$1
+#  shift
+#
+#  case "$command" in
+#    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+#    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+#    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+#    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+#  esac
+#}
+
 #export TERM=xterm-256color-italic
 
+# Git checkout with fzf
+gch() {
+ git checkout $(git branch --all | sed "s/remotes\/origin\///" | fzf)
+}
+
+
+
+#zoxide
+eval "$(zoxide init zsh --cmd j)"
+
 source $HOME/.aliases
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+fpath+=${ZDOTDIR:-~}/.zsh_functions
