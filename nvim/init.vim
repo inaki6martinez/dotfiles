@@ -57,6 +57,8 @@ Plug 'lambdalisue/suda.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
 
+Plug 'ThePrimeagen/vim-be-good'
+
 "Comments in C/C++
 "Plug 'preservim/nerdcommenter'
 
@@ -152,7 +154,6 @@ endfun
 
 nnoremap <silent><esc> <esc>:call TurnOffCapsLock()<cr>
 inoremap <silent><esc> <esc>:call TurnOffCapsLock()<cr>
-nnoremap ; :
 nnoremap ff :w<CR>
 inoremap jj <ESC>
 inoremap <silent>JJ <ESC>:call TurnOffCapsLock()<CR>
@@ -290,6 +291,10 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
+"Next/previous change in diff view
+nnoremap <leader>p [c
+nnoremap <leader>n ]c
+
 " =============================================================================
 " # Autocommands
 " =============================================================================
@@ -331,17 +336,22 @@ set shortmess+=c
 set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
+function! CheckBackSpace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:get_visual_selection()
     " Why is this not a built-in Vim script function?!
@@ -358,6 +368,57 @@ function! s:get_visual_selection()
 endfunction
 
 vmap <leader>m get_visual_selection()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cinoption
+" tell which cinoption take effect for current line
+com! WhichCinoption call s:which_cinoption()
+
+function s:which_cinoption() abort
+
+  " test if cindent take effect
+  if !empty(&indentexpr)
+    echo "'indentexpr' exists, it overrides 'cindent'."
+    return
+  endif
+
+  if !&cindent
+    echo "'cindent' is currently disabled."
+    return
+  endif
+
+  " test cinoption one by one
+
+  " copied from :h cino- <ctrl-a> in vim8.2 1-677
+  let opts = ['#','(',')','+','/',':','=','>','^','{','}','C','E','J','L','M',
+        \ 'N','U','W','b','c','e','f','g','h','i','j','k','l','m','n','p','t',
+        \ 'u','w','*']
+
+  let indent = cindent(line('.'))
+  let results = []
+  let cinopt = &l:cinoptions
+
+  for opt in opts
+    try
+
+      " test it with 8s, it should be big enough to make difference
+      exe printf('setlocal cinoptions+=%s8s', opt)
+      if indent != cindent(line('.'))
+        let results += [opt]
+      endif
+
+    catch /.*/
+      echom 'failed to test ' . opt
+      echom 'internal error : ' . v:exception
+    finally
+      let &l:cinoptions = cinopt
+    endtry
+  endfor
+
+  echohl Macro
+  echom join(results)
+  echohl None
+endfunction
 
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
