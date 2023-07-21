@@ -1,0 +1,22 @@
+diff --git a/scripts/session.sh b/scripts/session.sh
+index 68db6af..2f80f16 100755
+--- a/scripts/session.sh
++++ b/scripts/session.sh
+@@ -39,11 +39,17 @@ else
+ fi
+ [[ "$target_origin" == "[cancel]" || -z "$target_origin" ]] && exit
+ target=$(echo "$target_origin" | grep -o '^[[:alpha:][:digit:]_-]*:' | sed 's/.$//g')
++current_session=$(tmux display-message -p '#S')
+ if [[ "$action" == "attach" ]]; then
+     echo "$target" | xargs tmux switch-client -t
+ elif [[ "$action" == "detach" ]]; then
+     echo "$target" | xargs -I{} tmux detach -s {}
+ elif [[ "$action" == "kill" ]]; then
++	sessions=$(tmux list-sessions | wc -l)
++	if [ "$sessions" -gt 2 ] && [ "$target" = "$current_session" ]; then
++		#switch to previous session
++		tmux switch-client -p 
++	fi
+     echo "$target" | sort -r | xargs -I{} tmux kill-session -t {}
+ elif [[ "$action" == "rename" ]]; then
+     tmux command-prompt -I "rename-session -t $target "
