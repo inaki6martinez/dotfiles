@@ -1,0 +1,22 @@
+#!/bin/bash
+
+logdir=/home/inaki/Documents/meter_logs/
+fname=$(ls -tr $logdir | tail -1)
+
+ip_line=$(/usr/local/bin/get_ip_addr | tail -1)
+
+ip=$(echo "$ip_line" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+echo $ip
+
+if [ -z $ip ]
+then
+	echo "ERROR no ip found in file"
+	exit
+fi
+
+
+set -o xtrace
+set_tcp=$(echo "set dlms_dev tcp:$ip,4059")
+echo $set_tcp > /tmp/zctcliip.txt
+cat /tmp/zctcliip.txt
+/home/inaki/dev/lib/libzctool/tools/zct_cli -f /tmp/zctcliip.txt $@

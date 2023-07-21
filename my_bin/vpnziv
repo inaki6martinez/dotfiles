@@ -1,3 +1,4 @@
 #!/bin/bash
 
-sudo openfortivpn 89.6.239.150:10443 -u inaki.martinez --trusted-cert 6269f6d1ac5f440c1bc1e6eb2daabe35c1ab6fddb3184c4f14cd4b3f2c04c4fd
+#sudo openfortivpn 212.81.155.129:10443 -u inaki.martinez --trusted-cert 6269f6d1ac5f440c1bc1e6eb2daabe35c1ab6fddb3184c4f14cd4b3f2c04c4fd --no-routes --pppd-ipparam=ziv
+sudo openfortivpn 212.81.155.129:10443 -u inaki.martinez --trusted-cert f0392560b6ead310d284894fa2e9f4b2dc91086831e81f40a5679a2275704c66 --no-routes --pppd-ipparam=ziv

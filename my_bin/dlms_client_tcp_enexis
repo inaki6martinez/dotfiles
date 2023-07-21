@@ -1,9 +1,10 @@
 #!/bin/bash
 
 logdir=/home/inaki/Documents/meter_logs/
+
 find "$logdir" -type f -mtime +30 -name '*.txt' -execdir rm -- '{}' \;
 
-if [ ! -z $2 ]
+if [ ! -z $3 ]
 then
 	fname=$(ls -tr $logdir | tail -1)
 	nvim "$logdir$fname"
@@ -11,6 +12,5 @@ else
 	now='dlms_client_'$(date '+%Y%m%d_%H%M%S')
 	fname="$logdir$now.txt"
 	echo $fname
-	/home/inaki/dev/lib/libmcoms_git/tools/mcoms_tools_hdlc_dlms_client -r -p 0x11 -d /tmp/hdlc_socket -c 1 < $1 2>&1 | ts [%m/%d-%H:%M:%.S] | tee -a "$fname"
+	/home/inaki/dev/lib/libmcoms_git/tools/mcoms_tools_hdlc_dlms_client -p 0x11 -d tcp:"$2":4059 -c 1 < $1 2>&1 | ts [%m/%d-%H:%M:%.S] | tee -a "$fname"
 fi
-

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Script that receives a web direction for a file
+# It downloads the file and saves and saves in /tmp folder
+# After downloading it, it is opened with nvim
+
+# Get the file name
+filename=$(echo $1 | sed 's/.*\///g')
+
+# Download file
+wget $1 --no-check-certificate -O /tmp/$filename
+
+# Open file
+nvim /tmp/$filename
+
+# Delete file
+rm /tmp/$filename
+

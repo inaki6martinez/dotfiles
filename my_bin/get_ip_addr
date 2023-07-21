@@ -1,0 +1,11 @@
+#!/bin/bash
+
+logdir=/home/inaki/Documents/meter_logs/
+
+find "$logdir" -type f -mtime +30 -name '*.txt' -execdir rm -- '{}' \;
+
+fname=$(ls -tr $logdir | tail -1)
+strings "$logdir$fname" | grep "Assigned IP:" | tail -1
+
+
+
